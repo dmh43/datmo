@@ -3,57 +3,69 @@
 
 |PyPI version| |Coverage Status| |Documentation Status| |Codacy Badge|
 
-+------+----------------------------+
-| OS   | CI testing on ``master``   |
-+======+============================+
-|      | |Linux|                    |
-+------+----------------------------+
-|      | |Windows|                  |
-+------+----------------------------+
++----------+----------------------------+
+| OS       | CI testing on ``master``   |
++==========+============================+
+| |logo-L| | |Linux|                    |
++----------+----------------------------+
+| |logo-M| | |MacOS|                    |
++----------+----------------------------+
+| |logo-W| | |Windows|                  |
++----------+----------------------------+
 
-**Datmo** is an open source model tracking and reproducibility tool for
-developers. Use ``datmo init`` to turn any repository into a trackable
-task record with reusable environments and metrics logging.
+Datmo Alpha Release
+============================
 
-Table of Contents
-~~~~~~~~~~~~~~~~~
+**Datmo** is an open source model tracking and reproducibility tool for developers. Use `datmo init` to turn any repository into a trackable task record with reusable environments and metrics logging.
 
--  `Introduction <#introduction>`__
--  `Requirements <#requirements>`__
--  `Installation <#installation>`__
--  `Examples <#examples>`__
--  `Documentation <#documentation>`__
--  `Transform a Current Project <#transform>`__
--  `Sharing <#sharing>`__
--  `Contributing to Datmo </CONTRIBUTING.md>`__
 
-Introduction
+**Note**: The current version of Datmo is an alpha release. This means commands are subject to change. If you find any bugs please
+feel free contribute by adding issues so the contributors can address them.  
+
+Features
 ------------
 
-Tracking experiments in a unified manner for data science, machine
-learning, and artificial intelligence projects is difficult for many
-reasons, with one of the largest being the lack of interoperability
-between frameworks, languages, environments, and best practices.
+- **One command environment setup** (languages, frameworks, packages, etc)
+- **Tracking and logging** for model config and results
+- **Project versioning** (model state tracking)
+- **Experiment reproducibility** (re-run tasks)
+- **Visualize + export** experiment history
 
-Datmo's open source tool helps to alleviate some of the largest pain
-points of dealing with model-based projects by leveraging strong
-foundational technologies and enforcing a set of conventions in a
-framework, language, and platform-agnostic CLI, with additional SDKs for
-more granular control and workflow integration.
+
+---
+
+**Table of Contents**
+
+-  :ref:`requirements`
+-  :ref:`installation`
+-  :ref:`examples`
+-  :ref:`documentation`
+-  :ref:`transform`
+-  :ref:`sharing`
+-  `Contributing to Datmo </CONTRIBUTING.md>`_
+
+
+.. _requirements:
 
 Requirements
 ------------
 
--  `openssl <https://github.com/openssl/openssl/blob/master/INSTALL>`__
--  `git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`__
--  `docker <https://docs.docker.com/engine/installation/>`__
+-  `openssl <https://github.com/openssl/openssl/blob/master/INSTALL>`_
+-  `git <https://git-scm.com/book/en/v2/Getting-Started-Installing-Git>`_
+-  `docker <https://docs.docker.com/engine/installation/>`_
+
+
+.. _installation:
 
 Installation
 ------------
 
-::
+.. code-block::
 
-    pip install datmo
+  pip install datmo
+
+
+.. _examples:
 
 Examples
 --------
@@ -143,76 +155,72 @@ In order to run the above code you can do the following.
 How it works
 ------------
 
-Project Structure
-~~~~~~~~~~~~~~~~~
+  Project Structure
+  ------------------------
 
-When running ``datmo init``, Datmo adds a hidden ``.datmo`` directory
-which keeps track of all of the various entities at play. This is
-ncessary to render a repository datmo-enabled.
+  When running ``datmo init``, Datmo adds a hidden ``.datmo`` directory
+  which keeps track of all of the various entities at play. This is
+  ncessary to render a repository datmo-enabled.
 
-Snapshots
-~~~~~~~~~
+  Snapshots
+  ------------------
 
-.. raw:: html
+  .. raw:: html
 
-   <p align="center">
+     <p align="center">
 
-::
+  ::
 
-    The fundamental unit of record in the Datmo ecosystem is a <b>Snapshot</b>, which contains 5 first-class components.
-    <br><br>
-    <img size="250px" src="https://raw.githubusercontent.com/datmo/datmo/docs-update/images/snapshot-badge-readme.png">
+      The fundamental unit of record in the Datmo ecosystem is a <b>Snapshot</b>, which contains 5 first-class components.
+      <br><br>
+      <img size="250px" src="https://raw.githubusercontent.com/datmo/datmo/docs-update/images/snapshot-badge-readme.png">
 
-.. raw:: html
+  .. raw:: html
 
-   </p>
+     </p>
 
-Code
-^^^^
+  **Code**
 
-Source code should be managed with current source control management
-tools. Datmo currently is built on top of git, but could theoretically
-be ported to work with any similar SCM protocol. While datmo will track
-all of your local changes and experiments on your machine, you will
-still need to push changes to a remote repository for them to be
-continually synced with a manager of choice (like GitHub).
+  Source code should be managed with current source control management
+  tools. Datmo currently is built on top of git, but could theoretically
+  be ported to work with any similar SCM protocol. While datmo will track
+  all of your local changes and experiments on your machine, you will
+  still need to push changes to a remote repository for them to be
+  continually synced with a manager of choice (like GitHub).
 
-For sharing Datmo entities directly with others (beta), see `this
-section <#sharing-beta>`__ of the README below.
+  For sharing Datmo entities directly with others (beta), see `this
+  section <#sharing-beta>`__ of the README below.
 
-Environment
-^^^^^^^^^^^
+  **Environment**
 
-Dependencies should be encoded using standard best practices for your
-source code. Python packages should be enumerated in a
-``requirements.txt`` file, while system level dependencies (typically
-found during GPU workflows) should be written into a ``Dockerfile``.
+  Dependencies should be encoded using standard best practices for your
+  source code. Python packages should be enumerated in a
+  ``requirements.txt`` file, while system level dependencies (typically
+  found during GPU workflows) should be written into a ``Dockerfile``.
 
-Configuration
-^^^^^^^^^^^^^
+  **Configuration**
 
-Variables used in your experiment that are necessary for
-reproducibility. These typically include algorithm hyperparameter
-values, train/test data split, etc.
+  Variables used in your experiment that are necessary for
+  reproducibility. These typically include algorithm hyperparameter
+  values, train/test data split, etc.
 
-Files
-^^^^^
+  **Files**
 
-Large files that cannot be stored in source code (ie: untrackable in git
-due to size) should be stored separately. For data sources that are not
-discretizable into files (or are stored elsewhere), it is advised to
-write out the location/directory of these data sources/files as an entry
-in the ``stats`` property.
 
-Stats
-^^^^^
+  Large files that cannot be stored in source code (ie: untrackable in git
+  due to size) should be stored separately. For data sources that are not
+  discretizable into files (or are stored elsewhere), it is advised to
+  write out the location/directory of these data sources/files as an entry
+  in the ``stats`` property.
 
-Model metrics are written to the ``stats`` property of a snapshot. Datmo
-does not enforce any type of formal metric definition, the user is free
-to pass any key-value dictionary during snapshot creation. This enables
-users to abide by their own metric logging convention while having the
-flexibility of being able to natively compare metrics across algorithms
-or frameworks.
+  **Stats**
+
+  Model metrics are written to the ``stats`` property of a snapshot. Datmo
+  does not enforce any type of formal metric definition, the user is free
+  to pass any key-value dictionary during snapshot creation. This enables
+  users to abide by their own metric logging convention while having the
+  flexibility of being able to natively compare metrics across algorithms
+  or frameworks.
 
 Documentation
 -------------
@@ -241,22 +249,20 @@ command
     $ datmo cleanup
 
 Optional: Mark your GitHub repository as a Datmo project
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------------------------------
 
 Once you initialize your project, you can denote your repository as a
 datmo project by adding the following badge to your README file. This
 helps someone pulling the code to know how to setup and run Datmo
 commands, as the badge will link them to usage instructions here.
 
-Markdown
-^^^^^^^^
+**Markdown**
 
 .. code:: markdown
 
     [![Datmo Model](https://github.com/datmo/datmo/blob/master/images/badge.svg)](https://github.com/datmo/datmo)
 
-ReStructuredText
-^^^^^^^^^^^^^^^^
+**ReStructuredText**
 
 ::
 
@@ -280,7 +286,7 @@ The below has been tested on BASH terminals only. If you are using
 another terminal, you may run into some errors.
 
 Push to remote
-~~~~~~~~~~~~~~
+-----------------
 
 ::
 
@@ -296,7 +302,7 @@ another location. See the instructions below to see how to replicate it
 at another location
 
 Pull from remote
-~~~~~~~~~~~~~~~~
+----------------------
 
 ::
 
@@ -325,3 +331,7 @@ If you are interested in sharing using the datmo protocol, you can visit
 .. |Windows| image:: https://ci.appveyor.com/api/projects/status/5302d8a23qr4ui4y/branch/master?svg=true
    :target: https://ci.appveyor.com/project/asampat3090/datmo/branch/master
 
+.. |MacOS| image:: https://circleci.com/gh/datmo/datmo.svg?style=shield
+   :target: https://circleci.com/gh/datmo/datmo
+
+.. |logo-L| image:: http://icons.iconarchive.com/icons/dakirby309/simply-styled/256/OS-Linux-icon.png
