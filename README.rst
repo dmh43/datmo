@@ -104,7 +104,7 @@ leveraging Datmo.
 |                                              |                                              |
 |                                              |   datmo.snapshot.create(                     |
 |                                              |       message="my first snapshot",           |
-|                                              |       filepaths=["model.pkl"],               |
+|                                              |       paths=["model.pkl"],                   |
 |                                              |       config=config,                         |
 |                                              |       stats=stats,                           |
 |                                              |   ) # extra line                             |
